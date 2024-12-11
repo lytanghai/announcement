@@ -1,0 +1,83 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Application</title>
+    <script>
+        let socket = new WebSocket("ws://localhost:8080");
+        socket.onmessage = function(event) {
+            let message = JSON.parse(event.data);
+            displayMessage(message);
+        };
+
+        function sendMessage() {
+            let messageContent = document.getElementById("message").value;
+            let message = {
+                sender: "User",
+                content: messageContent
+            };
+            socket.send(JSON.stringify(message));
+            document.getElementById("message").value = '';
+        }
+
+        function displayMessage(message) {
+            let messageElement = document.createElement('div');
+            messageElement.textContent = `${message.sender}: ${message.content}`;
+            document.getElementById('messages').appendChild(messageElement);
+        }
+    </script>
+</head>
+<body>
+    <h1>Chat Application</h1>
+    <div id="messages"></div>
+    <input type="text" id="message" placeholder="Enter your message">
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Example</title>
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>WebSocket Example</h1>
+  <button id="sendMessageButton">Send Message</button>
+  <div id="log"></div>
+
+  <script>
+    // Connect to the server
+    const socket = io('http://localhost:8080');
+
+    // Log container
+    const logDiv = document.getElementById('log');
+
+    // Function to log messages
+    const logMessage = (message) => {
+      const p = document.createElement('p');
+      p.textContent = message;
+      logDiv.appendChild(p);
+    };
+
+    // Listen for the 'messageSendToSender' event
+    socket.on('messageSendToSender', (data, ack) => {
+      logMessage(`Received from server: ${JSON.stringify(data)}`);
+      
+      // Send acknowledgment back to the server
+      if (ack) {
+        ack('Acknowledgment from client');
+        logMessage('Acknowledgment sent to server');
+      }
+    });
+
+    // Handle the button click to emit 'sendMessage' event
+    document.getElementById('sendMessageButton').addEventListener('click', () => {
+      socket.emit('sendMessage', { message: 'Hello, Server!' }, (response) => {
+        logMessage(`Server acknowledgment: ${response}`);
+      });
+    });
+  </script>
+</body>
+</html>
