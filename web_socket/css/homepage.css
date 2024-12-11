@@ -1,0 +1,19 @@
+body {
+    background-color: #202422;
+}
+
+.header {
+    width: 99%;
+}
+
+.header .logo {
+    padding-left: 1%;
+}
+.header .logo h3 {
+    color: #fafafa;
+    font-size: 2rem;
+}
+
+.header .logo .features {
+    
+}

@@ -61,13 +61,10 @@ public class SocketConnectionHandler extends TextWebSocketHandler {
 
         Validator.validateKeys(requestBody, Message.class);
 
-
         // Create a custom message object
-//        Message customMessage = new Message();
-
-//        Converter.convert(requestBody, customMessage);
-
-//        customMessage.setTitle("TEST FROM BK");
+        Message customMessage = new Message();
+        Converter.convert(requestBody, customMessage);
+        customMessage.setTitle("TEST FROM BK");
 
         // Iterate through the list of WebSocket sessions and send the custom message
         for (WebSocketSession webSocketSession : webSocketSessions) {
@@ -77,14 +74,12 @@ public class SocketConnectionHandler extends TextWebSocketHandler {
 
 //            // Convert the custom message object to JSON and send it to the session
             ObjectMapper objectMapper = new ObjectMapper();
-            String customMessageJson = objectMapper.writeValueAsString(message.getPayload());
-//            webSocketSession.sendMessage(new TextMessage(customMessageJson));
+            String customMessageJson = objectMapper.writeValueAsString(customMessage);
 
             log.info("listen message: {}", message);
             log.info("broadcast message {}", new TextMessage(customMessageJson.replaceAll("\\\\","")));
             webSocketSession.sendMessage(new TextMessage(customMessageJson));
-//            webSocketSession.sendMessage(message);
-//            log.info("Received custom message : {}", message);
+
         }
     }
 }

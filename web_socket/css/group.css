@@ -1,0 +1,43 @@
+body {
+    padding: 20px;
+}
+
+#messages {
+    margin-top: 20px;
+}
+
+.outgoing-message {
+    text-align: right;
+    background-color: #308D46;
+    color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.incoming-message {
+    text-align: left;
+    background-color: #2C3E50;
+    color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.gfg-color {
+    background-color: #308D46;
+    color: white;
+}
+
+.gfg-color:hover {
+    color: white;
+}
+
+.gfg-blue {
+    background-color: #2C3E50;
+    color: white;
+}
+
+.gfg-blue:hover {
+    color: white;
+}

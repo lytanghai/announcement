@@ -18,33 +18,19 @@ function connect(topic) {
   console.log(currentUser);
 }
 
-function passArgument(data) {
-  alert("The value passed is: " + data);
-}
 
 //This function takes care of printing the message on browser
 function printMessage(data) {
-
   const messages = document.getElementById("messages");
 
   const newMessage = document.createElement("div");
   newMessage.className = "incoming-message";
 
-
-  const dataString = `{
-    "name": "z",
-    "message": "hello",
-    "content": "test content"
-}`;
-
-
-
   let messageObj = JSON.parse(data.replace(/\n/g, "\\n").replace(/\t/g, "\\t"))
 
-  messageObj = JSON.parse(messageObj)
+  messageObj = JSON.parse(data)
   newMessage.innerHTML = messageObj["name"] + " : " + messageObj.message + " : " + messageObj.content;
   messages.appendChild(newMessage);
-
 }
 
 //This function handles functionality of sending the message to websocket
